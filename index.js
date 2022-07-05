@@ -22,11 +22,18 @@ NEG_AVG = CALC_AVG(NEG_NUMBERS)
 return [POS_AVG, NEG_AVG]
 */
 function calcAverages(inputNumbers) {
-  const posNums = getAllPosNumbers(inputNumbers);
-  const negNums = getAllNegNumbers(inputNumbers);
+  const posNums = inputNumbers.filter(isPositive);
+  const negNums = inputNumbers.filter(isNegative);
   const posAvg = calcAverage(posNums);
   const negAvg = calcAverage(negNums);
   return [posAvg, negAvg];
+}
+//predicate functions.  testing functions.
+function isPositive(n) {
+  return n > 0;
+}
+function isNegative(n) {
+  return n < 0;
 }
 
 function testCalcAverages() {
@@ -75,48 +82,6 @@ function testCalcAverage() {
   console.log(calcAverage([-3, 3]), 0);
   console.log(calcAverage([1, 2, 3]), 2);
 }
-
-/* pseudocode
- * PARAMS: INPUT_NUMBERS
- * POS_NUMS = []
- * for each NUM of INPUT_NUMBERS
- *     if NUM is positive
- *         append NUM to POS_NUMS
- * return POS_NUMS
- */
-function getAllPosNumbers(inputNumbers) {
-  const posNums = [];
-  for (const num of inputNumbers) {
-    if (num > 0) {
-      posNums.push(num);
-    }
-  }
-  return posNums;
-}
-
-function getAllNegNumbers(inputNumbers) {
-  const posNums = [];
-  for (const num of inputNumbers) {
-    if (num < 0) {
-      posNums.push(num);
-    }
-  }
-  return posNums;
-}
-
-function testGetAllPosNumbers() {
-  console.log(getAllPosNumbers([10, -2, -100, 3, -7]), [10, 3]);
-  console.log(getAllPosNumbers([10, 0, 0, -7]), [10]);
-  console.log(getAllPosNumbers([-20, -40]), []);
-}
-
-function testGetAllNegNumbers() {
-  console.log(getAllNegNumbers([10, -2, -100, 3, -7]), [-2, -100, -7]);
-  console.log(getAllNegNumbers([10, 0, 0, -7]), [-7]);
-  console.log(getAllNegNumbers([20, 40]), []);
-}
-// testGetAllNegNumbers();
-// testGetAllPosNumbers();
 
 // testCalcAverage();
 testCalcAverages();
