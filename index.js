@@ -14,15 +14,21 @@ TODO: what about zeros in the input.
 */
 
 /* pseudocode: 
-POS_NUMBERS = get all pos numbers from INPUT_NUMBERS
-NEG_NUMBERS = get all neg numbers from INPUT_NUMBERS
+POS_NUMBERS = getAllPosNumbers(INPUT_NUMBERS)
+NEG_NUMBERS = getAllNegNumbers(INPUT_NUMBERS)
+
 POS_AVG = CALC_AVG(POS_NUMBERS)
 NEG_AVG = CALC_AVG(NEG_NUMBERS)
 return [POS_AVG, NEG_AVG]
 */
 function calcAverages(inputNumbers) {
-  console.log("hello world");
+  const posNums = getAllPosNumbers(inputNumbers);
+  const negNums = getAllNegNumbers(inputNumbers);
+  const posAvg = calcAverage(posNums);
+  const negAvg = calcAverage(negNums);
+  return [posAvg, negAvg];
 }
+
 function testCalcAverages() {
   console.log(calcAverages([10, -100, 20, -200, -3]), [15, -101]);
   console.log(calcAverages([20, -3]), [20, -3]);
@@ -69,6 +75,48 @@ function testCalcAverage() {
   console.log(calcAverage([-3, 3]), 0);
   console.log(calcAverage([1, 2, 3]), 2);
 }
-testCalcAverage();
 
-// testCalcAverages();
+/* pseudocode
+ * PARAMS: INPUT_NUMBERS
+ * POS_NUMS = []
+ * for each NUM of INPUT_NUMBERS
+ *     if NUM is positive
+ *         append NUM to POS_NUMS
+ * return POS_NUMS
+ */
+function getAllPosNumbers(inputNumbers) {
+  const posNums = [];
+  for (const num of inputNumbers) {
+    if (num > 0) {
+      posNums.push(num);
+    }
+  }
+  return posNums;
+}
+
+function getAllNegNumbers(inputNumbers) {
+  const posNums = [];
+  for (const num of inputNumbers) {
+    if (num < 0) {
+      posNums.push(num);
+    }
+  }
+  return posNums;
+}
+
+function testGetAllPosNumbers() {
+  console.log(getAllPosNumbers([10, -2, -100, 3, -7]), [10, 3]);
+  console.log(getAllPosNumbers([10, 0, 0, -7]), [10]);
+  console.log(getAllPosNumbers([-20, -40]), []);
+}
+
+function testGetAllNegNumbers() {
+  console.log(getAllNegNumbers([10, -2, -100, 3, -7]), [-2, -100, -7]);
+  console.log(getAllNegNumbers([10, 0, 0, -7]), [-7]);
+  console.log(getAllNegNumbers([20, 40]), []);
+}
+// testGetAllNegNumbers();
+// testGetAllPosNumbers();
+
+// testCalcAverage();
+testCalcAverages();
